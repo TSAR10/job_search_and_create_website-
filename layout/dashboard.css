@@ -1,0 +1,180 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body{
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+}
+#button{
+  position: fixed;
+  width:6vw;
+  height:6vw;
+  max-width:100px;
+  max-height:100px;
+  min-width: 70px;
+  min-height: 70px;
+  background-color: midnightblue;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:white;
+  font-size: clamp(2.5rem,4.5vw,5rem);
+  font-weight: 700;
+  bottom: 2.5%;
+  right:2.5%;
+  box-shadow: 2px 1px 5px 1px black;
+}
+a{
+  width: auto;
+  height: auto;
+  text-decoration: none;
+}
+.spacing{
+  margin: 2.5%;
+  flex-wrap: wrap;
+}
+#tiles{
+  padding: 1%;
+  position: relative;
+  margin: 1.5% auto 1.5% auto;
+  width:95%;
+  height:40%;
+  border:1px solid grey;
+  box-shadow: 2px 2px 5px 5px grey;
+  display: flex;
+  flex-direction: column;
+}
+#form{
+  height:100%;
+  width:60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#form > input[type="submit"],#upper{
+  height:50%;
+  width:20%;
+}
+#form > input[type="text"]{
+  height:60%;
+  width:65%;
+  font-size: clamp(1rem,2vw,1.5rem);
+  padding:15px;
+}
+#name{
+  height:15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: clamp(1rem,5vw,2rem);
+  flex-wrap: wrap;
+}
+#name > span{
+  min-width:225px
+}
+#description{
+  padding-top: 1%;
+  padding-bottom: 1%;
+  height:50%;
+  font-size: clamp(1rem,1.5vw,1.5rem);
+}
+#skills{
+  height:18%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+#skills > span{
+  min-width: 150px;
+  font-size: clamp(1rem,1.5vw,1.5rem);
+  text-align: left;
+}
+#skills > span:nth-child(3){
+  text-transform:uppercase;
+  text-align: center;
+}
+#editor{
+  width:100%;
+  height:15%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+h3{
+  display: inline;
+}
+#button_edit{
+  width:17%;
+  min-width: 150px;
+  max-width: 160px;
+  height:100%;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-color: purple;
+  color: white;
+  border:1px solid purple;
+  box-shadow: 0px 0px 5px 2px black;
+  font-size: clamp(1rem,1vw,1.5rem);
+  margin-right: 15px;
+}
+#button_edit_app{
+  width:25%;
+  min-width: 250px;
+  max-width: 255px;
+  height:100%;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-color: purple;
+  color: white;
+  border:1px solid purple;
+  box-shadow: 0px 0px 5px 2px black;
+  font-size: clamp(1rem,1vw,1.5rem);
+}
+@media only screen and (max-width: 650px){
+  #tiles{
+    height:85%;
+  }
+  .spacing{
+
+  }
+  #name{
+    height:18%;
+  }
+  #description{
+    height:40%;
+    font-size: clamp(1.2rem,4vw,1.5rem);
+  }
+  #editor{
+    height:24%;
+    align-items: center;
+  }
+  #skills > span:nth-child(3){
+    margin-right: auto;
+  }
+  a{
+  height: 40%;
+  }
+  #button_edit,#button_edit_app{
+    height:100%;
+    padding: 0%;
+  }
+  #skills{
+    align-items: center;
+    height: 18%;
+    font-size: clamp(1.2rem,4vw,1.5rem);
+  }
+  #editor{
+    font-size: clamp(1rem,3.5vw,1.5rem);
+  }
+  #name > span{
+    min-width:225px
+  }
+}
