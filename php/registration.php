@@ -21,7 +21,7 @@
       else{
         $password = $_SESSION["password"];
       }
-      $college = trim($_POST["college"]);
+      $college = trim($_POST["college"]); //taking the posted input value
       $tenth_res = (int)trim($_POST["tenth_res"]);
       $twelfth_res = (int)trim($_POST["twelfth_res"]);
       $grad_res = (int)trim($_POST["grad_res"]);
@@ -29,7 +29,7 @@
       if($first_name != "" || $last_name != "" || $phone != "" || $college != "" || $tenth_res != "" || $grad_res != "" || $passing_yr != "" || $twelfth_res != "" || $email != "" || $password != ""){
         if (isset($_FILES['cv']) && $_FILES['cv']['error'] === UPLOAD_ERR_OK) {
           $dir = "../upload";
-          $fileName = $_FILES['cv']['name'];
+          $fileName = $_FILES['cv']['name'];    //uploading the CV
           $fileSize = $_FILES['cv']['size'];
           $fileArray = explode(".",$fileName);
           $FileType = strtolower(end($fileArray));
@@ -42,7 +42,7 @@
               if(!isset($_SESSION["action"])){
                 $query = 'INSERT INTO applicant (first_name,last_name,phone,college,tenth_res,twelfth_res,cv,grad_res,passing_yr,type,email,password) VALUES (:first_name,:last_name,:phone,:college,:tenth_res,:twelfth_res,:cv,:grad_res,:passing_yr,:type,:email,:password)';
                 $stmt = $pdo -> prepare($query);
-                $stmt -> bindParam('first_name',$first_name);
+                $stmt -> bindParam('first_name',$first_name); //inserting the posted data to database
                 $stmt -> bindParam('last_name',$last_name);
                 $stmt -> bindParam('phone',$phone);
                 $stmt -> bindParam('college',$college);
@@ -62,7 +62,7 @@
               else{
                 $query = 'UPDATE applicant set first_name =:first_name, last_name =:last_name,phone =:phone,college =:college,tenth_res =:tenth_res,twelfth_res =:twelfth_res,grad_res =:grad_res,passing_yr =:passing_yr,type =:type,email =:email WHERE password =:password';
                 $stmt = $pdo -> prepare($query);
-                $stmt -> bindParam('first_name',$first_name);
+                $stmt -> bindParam('first_name',$first_name);     //user profile updation
                 $stmt -> bindParam('last_name',$last_name);
                 $stmt -> bindParam('phone',$phone);
                 $stmt -> bindParam('college',$college);
@@ -95,7 +95,7 @@
       }
     }
   elseif($_SERVER["REQUEST_METHOD"] == 'GET' && isset($_SESSION["type"]) && !isset($_GET['id'])) {
-    header("location:../php/index.php");
+    header("location:../php/index.php"); 
   }
   else{
     $query = 'SELECT * from applicant where email = :email';

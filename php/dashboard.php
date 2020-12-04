@@ -20,7 +20,7 @@
     $stmt -> execute();
     $result = $stmt -> fetch();
     $_SESSION["id"] = $result[0];
-    if($_SESSION["type"] == 'company' && !isset($_GET["id"]))
+    if($_SESSION["type"] == 'company' && !isset($_GET["id"]))   //it will display the jobs set by the respective company
     {
       $query = 'SELECT jobs_available.*,company.company_name FROM jobs_available inner join company on jobs_available.company_id = :company_id';
       $stmt = $pdo -> prepare($query);
@@ -30,7 +30,7 @@
       unset($_SESSION["applied"]);
 
     }
-    elseif($_SERVER["REQUEST_METHOD"] == 'POST'){
+    elseif($_SERVER["REQUEST_METHOD"] == 'POST'){       // it will display the searched job to user
         $search = $_POST["job_search"];
         $query = 'SELECT jobs_available.*,company.company_name FROM jobs_available inner join company on jobs_available.company_id = company.phone WHERE job_title =:job_search';
         $stmt = $pdo -> prepare($query);
@@ -42,7 +42,7 @@
 
 
     }
-    elseif(isset($_GET["id"])){
+    elseif(isset($_GET["id"])){     //it will make user apply for the jobs
       $id = $_GET["id"];
       $query = 'SELECT company_id from jobs_available where job_id =:id';
       $stmt = $pdo -> prepare($query);
@@ -64,7 +64,7 @@
     }
     else{
       $query = 'SELECT job_applied.company_id,job_title,description,salary,job_applied.job_id,number_applied,status,company.company_name FROM jobs_available inner join job_applied on jobs_available.job_id = job_applied.job_id and applicant_id =:applicant_id inner join company on job_applied.company_id = company.phone';
-      $stmt = $pdo -> prepare($query);
+      $stmt = $pdo -> prepare($query);   // display the jobs applied to user
       $stmt -> bindParam('applicant_id',$result[0]);
       $stmt -> execute();
       $result = $stmt -> fetchALL();

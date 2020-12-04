@@ -27,7 +27,7 @@
         $config['database_pass']
       );
       $query = 'SELECT email,password,type FROM company where email = :email and password = :password union SELECT email,password,type FROM applicant where email = :email and password = :password';
-      $stmt = $pdo -> prepare($query);
+      $stmt = $pdo -> prepare($query);    // validating the user
       $stmt -> bindParam('email',$email);
       $stmt -> bindParam('password',$pass);
       $stmt -> execute();

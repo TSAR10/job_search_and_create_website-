@@ -4,16 +4,16 @@
     unset($_SESSION["old_password"]);
   }
   $config = require '../configure.php';
-  $pdo = new PDO(
+  $pdo = new PDO(                     //database connection
     $config['database_dsn'],
     $config['database_user'],
     $config['database_pass']
   );
-  if(!isset($_SESSION['id'])){
+  if(!isset($_SESSION['id'])){            // validating the user
     header("location: ../php/index.php");
   }
   elseif (isset($_GET['id'])) {
-    unset($_SESSION["job_id"]);
+    unset($_SESSION["job_id"]);               // getting the job id from the link 
     $id = $_GET['id'];
     $id = (int) $id;
     $query = 'SELECT * from job_applied where job_id = :job_id';
@@ -21,7 +21,7 @@
     $stmt -> bindParam('job_id',$id);
     $stmt -> execute();
     $result = $stmt -> fetch();
-    if($_SESSION['id'] != $result[0]){
+    if($_SESSION['id'] != $result[0]){            //making the site hack proof if user type any other number in link it will logout him
       unset($_SESSION);
       session_destroy();
       header('location:../php/index.php');
@@ -31,7 +31,7 @@
       header("location:../php/application.php");
     }
   }
-  elseif(isset($_SESSION["job_id"])){
+  elseif(isset($_SESSION["job_id"])){      //this make user see the application job wise
     $id = (int)$_SESSION["job_id"];
     $query = 'SELECT * from applicant inner join job_applied on job_applied.applicant_id = applicant.phone where job_applied.job_id = :id';
     $stmt = $pdo -> prepare($query);

@@ -11,21 +11,21 @@
   else{
       $config = require '../configure.php';
       $pdo = new PDO(
-      $config['database_dsn'],
+      $config['database_dsn'],    //database connection
       $config['database_user'],
       $config['database_pass']
       );
       if($_SERVER["REQUEST_METHOD"] == 'POST')
       {
         $job_title = trim($_POST['job_title']);
-        $job_description = trim($_POST['job_description']);
+        $job_description = trim($_POST['job_description']);             // getting the posted values
         $salary = trim($_POST['salary']);
         $salary = (int)$salary;
         $status = trim($_POST['status']);
         if($job_title == "" || $job_description == "" || $salary == "" || $status == "")
         {
-          $not = 'not';
-          var_dump("$not");die;
+          // $not = 'not';
+          // var_dump("$not");die;
           header("location: ../php/dashboard.php");
         }
         else{
@@ -33,7 +33,7 @@
           {
             $query = 'INSERT INTO jobs_available (company_id,job_title,description,salary,status) VALUES (:company_id,:job_title,:job_description,:salary,:status)';
             $stmt = $pdo -> prepare($query);
-            $stmt -> bindParam('company_id',$_SESSION["id"]);
+            $stmt -> bindParam('company_id',$_SESSION["id"]);       //creating the new job
             $stmt -> bindParam('job_title',$job_title);
             $stmt -> bindParam('job_description',$job_description);
             $stmt -> bindParam('salary',$salary);
@@ -43,7 +43,7 @@
           else{
             $id = $_SESSION["job_id"];
             $id = (int)$id;
-            unset($_SESSION["job_id"]);
+            unset($_SESSION["job_id"]);           //editing the exixting job and their status
             $query = 'UPDATE jobs_available SET job_title = :job_title, description = :job_description, salary = :salary, status = :status WHERE job_id = :job_id';
             $stmt = $pdo -> prepare($query);
             $stmt -> bindParam('job_title',$job_title);
@@ -57,7 +57,7 @@
           header('location:../php/dashboard.php');
         }
       }
-      elseif (isset($_GET['id'])) {
+      elseif (isset($_GET['id'])) {                   //making the site hack proof if user type any other number in link it will logout him
         $id = $_GET['id'];
         $id = (int) $id;
         $query = 'SELECT job_title,description,salary,status,company_id from jobs_available where job_id = :job_id';
