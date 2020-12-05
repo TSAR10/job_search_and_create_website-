@@ -13,19 +13,19 @@
       $_SESSION['type'] = "applicant";
       $first_name = trim($_POST["first_name"]);
       $last_name = trim($_POST["last_name"]);
-      $phone = (int)trim($_POST["phno"]);
+      $phone = trim($_POST["phno"]);
       $email = trim($_POST["email"]);
-      if(isset($_post["password"])){
+      if(isset($_POST["password"])){
         $password = trim($_POST["password"]);
       }
-      else{
+      elseif(isset($_SESSION["password"])){
         $password = $_SESSION["password"];
       }
       $college = trim($_POST["college"]); //taking the posted input value
-      $tenth_res = (int)trim($_POST["tenth_res"]);
-      $twelfth_res = (int)trim($_POST["twelfth_res"]);
-      $grad_res = (int)trim($_POST["grad_res"]);
-      $passing_yr = (int)trim($_POST["passing_yr"]);
+      $tenth_res = trim($_POST["tenth_res"]);
+      $twelfth_res = trim($_POST["twelfth_res"]);
+      $grad_res = trim($_POST["grad_res"]);
+      $passing_yr = trim($_POST["passing_yr"]);
       if($first_name != "" || $last_name != "" || $phone != "" || $college != "" || $tenth_res != "" || $grad_res != "" || $passing_yr != "" || $twelfth_res != "" || $email != "" || $password != ""){
         if (isset($_FILES['cv']) && $_FILES['cv']['error'] === UPLOAD_ERR_OK) {
           $dir = "../upload";
@@ -55,7 +55,10 @@
                 $stmt -> bindParam('email',$email);
                 $stmt -> bindParam('password',$password);
                 $stmt -> execute();
-                sleep(5);
+                $check ="test";
+                sleep(10);
+                session_unset();
+                session_destroy();
                 header("location:../php/index.php");
 
               }
@@ -95,7 +98,9 @@
       }
     }
   elseif($_SERVER["REQUEST_METHOD"] == 'GET' && isset($_SESSION["type"]) && !isset($_GET['id'])) {
-    header("location:../php/index.php"); 
+    session_unset();
+    session_destroy();
+    header("location:../php/index.php");
   }
   else{
     $query = 'SELECT * from applicant where email = :email';
@@ -104,8 +109,10 @@
     $stmt -> execute();
     $result = $stmt -> fetch();
     // echo "<pre>"; var_dump($result); echo "</pre>";die;
-    $_SESSION["action"] = "edit";
-    $_SESSION["password"] = $result["password"];
+    if($result){
+      $_SESSION["action"] = "edit";
+      $_SESSION["password"] = $result["password"];
+    }
   }
 ?>
 <html>
@@ -116,7 +123,7 @@
   </title>
 </head>
 <body>
-  <h1>Registeration</h1>
+  <h1>Registration</h1>
   <div id = "log">
     <form id = "form" method="post" action="../php/registration.php" enctype="multipart/form-data">
       <p>
@@ -162,7 +169,7 @@
       <div id="ed">
         <p>
           <label for = "grad_res">Overall CGPA</label>
-          <input type="number" name="grad_res" id="grad_res" value="<?php if(isset($_GET["id"])){echo $result["grad_res"];}?>">
+          <input type="text" name="grad_res" id="grad_res" value="<?php if(isset($_GET["id"])){echo $result["grad_res"];}?>">
         </p>
         <p>
           <label for="passing_yr">Passing Year</label>
