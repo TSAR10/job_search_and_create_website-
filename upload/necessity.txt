@@ -1,0 +1,3 @@
+CV/RESUME is uploaded in this folder
+format allowed are  .pdf, doc, docx,.jpg
+max size 1 MB
