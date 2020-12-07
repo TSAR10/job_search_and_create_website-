@@ -26,7 +26,7 @@
       $twelfth_res = trim($_POST["twelfth_res"]);
       $grad_res = trim($_POST["grad_res"]);
       $passing_yr = trim($_POST["passing_yr"]);
-      if($first_name != "" || $last_name != "" || $phone != "" || $college != "" || $tenth_res != "" || $grad_res != "" || $passing_yr != "" || $twelfth_res != "" || $email != "" || $password != ""){
+      if( ($first_name != "" || $last_name != "" || $phone != "" || $college != "" || $tenth_res != "" || $grad_res != "" || $passing_yr != "" || $twelfth_res != "" || $email != "" || $password != "") ){
         if (isset($_FILES['cv']) && $_FILES['cv']['error'] === UPLOAD_ERR_OK) {
           $dir = "../upload";
           $fileName = $_FILES['cv']['name'];    //uploading the CV
@@ -55,8 +55,7 @@
                 $stmt -> bindParam('email',$email);
                 $stmt -> bindParam('password',$password);
                 $stmt -> execute();
-                $check ="test";
-                sleep(10);
+                sleep(5);
                 session_unset();
                 session_destroy();
                 header("location:../php/index.php");
