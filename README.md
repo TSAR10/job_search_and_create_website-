@@ -26,7 +26,7 @@
   -> Activate/inactivate job status
 
 
-# _cv is uploaded at uploads folder_
+# _cv is uploaded at uploads folder of the same dir_
 
 # Tech Used
 
