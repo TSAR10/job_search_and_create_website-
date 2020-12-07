@@ -8,7 +8,7 @@
 
  -> Can change password
 
- -> Upload CV (Only .pdf, doc, docx,.jpg formats are allowed) [max.file size 1 MB] *(Cannot update the cv)
+ -> Upload CV (Only .pdf, doc, docx,.jpg formats are allowed) [max.file size 1 MB] *(Cannot update the cv)*
   
  -> Search job
 
