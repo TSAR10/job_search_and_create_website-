@@ -24,3 +24,12 @@
   -> See job-wise applications 
 
   -> Activate/inactivate job status
+
+
+# _cv is uploaded at uploads folder_
+
+# Tech Used
+
+ -> PHP
+ -> CSS
+ -> MySql
