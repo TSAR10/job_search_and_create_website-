@@ -1,6 +1,6 @@
 # job_search_and_create_website-
 
-User panel
+# User panel
 
  ->  Can register
 
@@ -15,7 +15,7 @@ User panel
  -> Apply for the job
  
  
-Admin panel
+# Admin panel
 
   -> Create Job 
 
